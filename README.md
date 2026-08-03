@@ -1,44 +1,38 @@
-# Youkti — The Outbound Agentic OS (Teaser Site)
+﻿# Youkti ΓÇö The Outbound Agentic OS (Teaser Site)
 
-A high-fidelity, animated marketing site I designed and built for **Youkti.ai**, an AI-native B2B sales-execution platform. It was crafted as a freelance/portfolio project before Youkti launched its public site, and is not affiliated with or endorsed by the company.
+A marketing site I designed and built from scratch for **Youkti.ai**, an AI-native B2B sales-execution platform. This was a portfolio project I worked on before Youkti launched its public site ΓÇö it's not affiliated with or endorsed by the company.
+
+**Live site:** https://youkti-teaser.vercel.app/
 
 ![Youkti teaser preview](screenshots/youkti-teaser-preview.png)
 
-## 🔗 Live demo
+## What it is
 
-- **Live:** https://youkti-teaser.vercel.app/
-- **Deploy:** Vercel (static hosting, immutable asset caching via `vercel.json`)
+Youkti tells sales reps exactly *who to reach, what to pitch, and what to do next* ΓÇö it calls itself an "outbound agentic OS" powered by a GTM agent named **ARYA**. The teaser site had to make that pitch feel tangible, not like marketing fluff:
 
-## 🧠 The brief
+- A hero with an interactive ARYA prompt ΓÇö type a campaign description and get a built cockpit back
+- A hand-coded Cockpit mockup with account rows, ARYA's suggestions, live pipeline stats, and a signal watchlist
+- A pinned-scroll walkthrough that scrubs through four real product screenshots as you scroll
+- Four product tiles (Execute, Account Research, Outreach Automation, Competitive Intelligence) with looping mini-demos
+- An ARYA section with an auto-playing chat demo and typewriter text
+- Trust band with animated counters, personas, integrations, a proof spotlight, FAQ accordion, video testimonials, CTA, and footer
 
-Youkti tells sales reps exactly *who to reach, what to pitch, and what to do next* — an "outbound agentic OS" powered by its GTM agent **ARYA**. The site had to make that feel real:
+## How it's built
 
-- **Hero** — interactive ARYA prompt: type a campaign description, get a "campaign built" cockpit result.
-- **Product-UI mockup** — a fully hand-coded Cockpit with account rows, ARYA suggestions, live pipeline stats, and a signal watchlist.
-- **Pinned-scroll walkthrough** — signal → sequence story driven by GSAP ScrollTrigger, scrubbing through four real product screenshots.
-- **Platform grid** — four products (Execute, Account Research, Outreach Automation, Competitive Intelligence) with looping "Razorpay-style" mini demos.
-- **ARYA section** — an auto-playing chat demo with typewriter effects and a replay button.
-- Trust band with animated counters, personas, integrations, proof spotlight, FAQ accordion, video testimonials, CTA, and footer.
+- **Plain HTML/CSS/JS** ΓÇö no frameworks, no build step
+- **GSAP + ScrollTrigger** for the loader, scroll progress, reveals, pinned walkthrough, and counters
+- **Canvas** for the animated hero background
+- Fully responsive, with `prefers-reduced-motion` support throughout
 
-## 🛠 Tech stack
+## Things I'm happy with
 
-- **HTML5** — semantic, accessible markup (ARIA labels, keyboard support)
-- **CSS** — custom design system via CSS custom properties; no frameworks
-- **Vanilla JavaScript** — module-free, IIFE-scoped, no build step
-- **GSAP + ScrollTrigger** — loader, scroll progress, reveals, pinned walkthrough, counters, micro-interactions
-- **Canvas** — animated hero dot-wave background
-- **Fully responsive** with `prefers-reduced-motion` support throughout
+- No framework runtime, no build step ΓÇö just static files on Vercel with immutable caching for `/assets`
+- Every GSAP effect degrades to a no-JS / reduced-motion fallback, so the site still works if animations fail
+- The product mockup and mini-demos are pure HTML/CSS, not screenshots ΓÇö only the walkthrough uses real product images
 
-## ✨ Highlights
-
-- **Performance-minded:** no framework runtime, no build step, static deploy, immutable caching for `/assets`.
-- **Resilient:** every GSAP feature degrades gracefully to a no-JS / reduced-motion fallback (IntersectionObserver reveals).
-- **Hand-crafted UI:** the product mockup and all mini-demos are pure HTML/CSS, not screenshots — except the real product shots in the walkthrough.
-
-## 🚀 Run locally
+## Run it locally
 
 ```bash
-# serve the static folder
 npx serve .
 # or
 python -m http.server 8080
@@ -46,20 +40,20 @@ python -m http.server 8080
 
 Then open `http://localhost:8080`.
 
-## 📁 Project structure
+## Project structure
 
 ```
 .
-├── index.html          # single-page markup
-├── css/style.css       # design system + animation layer
-├── js/main.js          # GSAP interactions + fallbacks
-├── assets/             # logo, favicon, product screenshots, partner & integration logos
-├── images/             # UI icons (SVG)
-├── vercel.json         # caching headers
-└── screenshots/        # README preview
+Γö£ΓöÇΓöÇ index.html          # single-page markup
+Γö£ΓöÇΓöÇ css/style.css       # design system + animation layer
+Γö£ΓöÇΓöÇ js/main.js          # GSAP interactions + fallbacks
+Γö£ΓöÇΓöÇ assets/             # logo, favicon, product screenshots, partner & integration logos
+Γö£ΓöÇΓöÇ images/             # UI icons (SVG)
+Γö£ΓöÇΓöÇ vercel.json         # caching headers
+ΓööΓöÇΓöÇ screenshots/        # README preview
 ```
 
-## 📝 Notes
+## Notes
 
-- Built as a **portfolio piece** to demonstrate frontend engineering, motion design, and production polish.
-- Content is a concept/teaser; not the official Youkti marketing copy.
+- Built as a portfolio piece to show frontend engineering and motion design.
+- Content is a concept/teaser ΓÇö not the official Youkti marketing copy.
