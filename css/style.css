@@ -450,3 +450,70 @@ html.nav-open .nav_burger_bar:nth-child(3) { transform: translateY(-7px) rotate(
 .how_hint { text-align: center; margin-top: 14px; font-size: 12.5px; color: var(--text-muted); letter-spacing: .04em; text-transform: uppercase; }
 .how_hint::after { content: ' ↓'; display: inline-block; animation: hint-bob 1.6s ease-in-out infinite; }
 @keyframes hint-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+/* ---------- Personas ---------- */
+.persona_grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.persona_card {
+  background: var(--bg-dark-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 30px; transition: background .2s ease, border-color .2s ease;
+}
+.persona_card:hover { background: var(--bg-dark); border-color: var(--border-strong); }
+.persona_title {
+  font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.persona_desc { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
+
+/* ---------- Integrations ---------- */
+.integration_grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.int_chip {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: rgba(255,255,255,.05); border: 1px solid var(--border); border-radius: 999px;
+  padding: 10px 20px; font-size: 14.5px; font-weight: 500; color: var(--text); transition: border-color .15s ease, color .15s ease;
+}
+.int_icon { width: 20px; height: 20px; flex-shrink: 0; display: block; }
+.int_chip_more { color: var(--text-muted); }
+.int_more {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.int_chip:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Proof ---------- */
+.section_proof { background: var(--bg-soft); }
+.proof_grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.proof_card {
+  background: var(--bg-dark-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 32px; position: relative;
+}
+.proof_quote { font-size: 56px; font-weight: 700; color: var(--accent); line-height: .6; margin-bottom: 18px; }
+.proof_text { font-size: 15.5px; line-height: 1.65; color: var(--text); margin-bottom: 24px; }
+.proof_footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 18px; }
+.proof_logo { font-size: 17px; font-weight: 700; color: var(--ink); }
+.proof_logo_neo { color: var(--ink); }
+.proof_logo_deep { color: var(--text-muted); }
+.proof_meta { font-size: 12.5px; color: var(--text-faint); }
+
+/* ---------- Trust section ---------- */
+.trust_inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.trust_points { display: flex; flex-direction: column; gap: 24px; }
+.tpoint { display: flex; gap: 14px; }
+.tpoint h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.tpoint p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
+
+/* ---------- FAQ ---------- */
+.section_faq { background: var(--bg-soft); }
+.faq_flex { display: grid; grid-template-columns: 380px 1fr; gap: 60px; }
+.faq_list { display: flex; flex-direction: column; }
+.faq_row { border-bottom: 1px solid var(--border); }
+.faq_row:first-child { border-top: 1px solid var(--border); }
+.faq_question {
+  width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: none; border: 0; padding: 22px 0; text-align: left;
+  font-size: 16px; font-weight: 600; color: var(--ink); transition: color .15s ease;
+}
+.faq_question:hover { color: var(--accent); }
+.faq_plus { font-size: 22px; font-weight: 400; color: var(--accent); transition: transform .3s ease; flex-shrink: 0; line-height: 1; }
+.faq_row.is-open .faq_plus { transform: rotate(45deg); }
+.faq_answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+.faq_answer p { padding: 0 0 22px; font-size: 14.5px; color: var(--text-muted); line-height: 1.65; max-width: 640px; }
