@@ -658,3 +658,85 @@ html.nav-open .nav_burger_bar:nth-child(3) { transform: translateY(-7px) rotate(
   .btn_lg { width: 100%; }
   .btn_ghost { justify-content: center; }
 }
+
+/* ============================================================
+   Premium animation layer (GSAP-driven)
+   ============================================================ */
+
+/* ---------- Loader ---------- */
+.loader {
+  position: fixed; inset: 0; z-index: 3000;
+  background: var(--bg-dark);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 1; visibility: visible;
+}
+.loader_inner { text-align: center; }
+.loader_logo { height: 44px; width: auto; display: block; margin: 0 auto; }
+.loader_bar { width: 200px; height: 3px; background: #1e293b; border-radius: 99px; margin: 22px auto 0; overflow: hidden; }
+.loader_bar_fill { display: block; width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; }
+
+/* ---------- Scroll progress ---------- */
+.progress_wrap { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 2000; background: transparent; }
+.progress_bar { display: block; width: 0%; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+/* ---------- GSAP initial states (JS adds .js-anim) ---------- */
+html.js-anim [data-anim="hero"] .hero_eyebrow,
+html.js-anim [data-anim="hero"] .hero_heading,
+html.js-anim [data-anim="hero"] .hero_subhead,
+html.js-anim [data-anim="hero"] .hero_ctas { opacity: 0; }
+
+html.js-anim [data-anim="mockup"] { opacity: 0; }
+
+html.js-anim .feature_card,
+html.js-anim .how_step,
+html.js-anim .persona_card,
+html.js-anim .proof_card,
+html.js-anim .tpoint { opacity: 0; }
+
+html.js-anim .section_head { opacity: 0; }
+html.js-anim .trust_stats .tstat { opacity: 0; }
+html.js-anim .integration_grid .int_chip { opacity: 0; }
+
+/* ---------- Cockpit micro-motion ---------- */
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(5,150,105,.4);} 50% { box-shadow: 0 0 0 6px rgba(5,150,105,0);} }
+.pill_dot { animation: pulse-dot 2.2s ease-in-out infinite; }
+
+@keyframes arya-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+/* ARYA typing caret */
+@keyframes caret-blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+.arya_caret { display: inline-block; width: 2px; height: 1em; background: var(--accent-soft-strong); margin-left: 2px; vertical-align: text-bottom; animation: caret-blink .9s step-end infinite; }
+
+/* Spark bars entrance handled by GSAP; base animate bars for idle life */
+@keyframes spark-breathe { 0%,100% { opacity: .9; } 50% { opacity: .6; } }
+.spark_bar { animation: spark-breathe 3s ease-in-out infinite; }
+.spark_bar:nth-child(2n) { animation-delay: .4s; }
+.spark_bar:nth-child(3n) { animation-delay: .8s; }
+
+/* ---------- Feature card hover lift (enhance) ---------- */
+.feature_card { will-change: transform; }
+.feature_card:hover .feature_icon { transform: scale(1.08); }
+.feature_icon { transition: transform .25s ease; }
+
+/* ---------- Marquee (integrations) add motion ---------- */
+.marquee_wrap { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marquee_track { display: flex; gap: 16px; width: max-content; }
+
+/* ---------- CTA glow sweep ---------- */
+.cta_card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(138,176,255,.18) 50%, transparent 70%);
+  background-size: 200% 100%; background-position: 120% 0;
+  pointer-events: none;
+}
+.cta_card.is-shining::after { animation: cta-sweep 3.2s ease-in-out infinite; }
+@keyframes cta-sweep { 0% { background-position: 120% 0; } 60%,100% { background-position: -80% 0; } }
+
+/* ---------- Footer reveal ---------- */
+.section_footer { transform-origin: top; }
+
+/* ---------- Reduced motion guard for pure-CSS bits ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .loader_bar_fill { width: 100%; }
+  .pill_dot, .spark_bar { animation: none !important; }
+}
