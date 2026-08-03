@@ -1041,3 +1041,298 @@ html.js-anim .integration_grid .int_chip { opacity: 0; }
 }
 .tlogo { font-size: 21px; font-weight: 700; color: var(--text-faint); letter-spacing: -.01em; white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .tm_track { animation: none; } }
+
+/* ============================================================
+   Walkthrough � pinned scroll-driven story
+   ============================================================ */
+.section_walkthrough { padding: 110px 0 110px; background: var(--bg-soft); }
+@media (max-width: 767px) {
+  .section_walkthrough { padding: 72px 0; }
+}
+.walkthrough_head { text-align: center; margin-bottom: 40px; }
+.walk_stage { position: relative; max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+.walk_panel { position: relative; }
+.walk_screen {
+  position: relative; border-radius: 20px; overflow: hidden;
+  aspect-ratio: 1900 / 927;
+  border: 1px solid var(--border); box-shadow: var(--shadow-lift); background: var(--white);
+}
+.walk_shot { position: absolute; inset: 0; opacity: 0; transform: scale(1.04); }
+.walk_shot.is-active { opacity: 1; transform: scale(1); position: relative; }
+.walk_shot img { width: 100%; display: block; }
+.walk_rail { height: 4px; background: var(--border); border-radius: 99px; margin-top: 18px; overflow: hidden; }
+.walk_progress { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; }
+.walk_captions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 26px; }
+.walk_caption { opacity: .75; transform: translateY(6px); }
+.walk_caption.is-active { opacity: 1; transform: none; }
+.walk_step { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--accent-soft-strong); letter-spacing: .06em; }
+.walk_caption h3 { font-family: var(--font-display); font-size: 18px; color: var(--ink); margin: 6px 0 4px; }
+.walk_caption p { font-size: 13.5px; color: var(--text); line-height: 1.55; }
+@media (max-width: 767px) {
+  .walk_captions { grid-template-columns: 1fr 1fr; }
+  .walk_shot { position: relative; opacity: 1; transform: none; }
+  .walk_shot:not(.is-active) { display: none; }
+}
+
+/* ---------- Proof cards: hover lift + accent ---------- */
+.proof_card { transition: transform .25s ease, box-shadow .25s ease; will-change: transform; }
+.proof_card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.proof_quote { transition: transform .3s ease; display: inline-block; }
+.proof_card:hover .proof_quote { transform: scale(1.15) translateY(2px); color: var(--accent-2); }
+
+/* ---------- Trust points: hover slide ---------- */
+.tpoint { transition: transform .25s ease; }
+.tpoint:hover { transform: translateX(6px); }
+
+/* ---------- Persona cards: hover glow ---------- */
+.persona_card { transition: transform .25s ease, box-shadow .25s ease, background .2s ease; }
+.persona_card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+
+/* ---------- Integration chips: hover fill ---------- */
+.int_chip { transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease; }
+.int_chip:hover { transform: translateY(-2px); background: rgba(255,255,255,.09); border-color: var(--border-strong); }
+.int_chip:hover .int_icon { transform: scale(1.1); }
+.int_icon { transition: transform .2s ease; }
+
+/* ---------- FAQ row polish ---------- */
+.faq_row { transition: background .2s ease; }
+.faq_row:hover { background: rgba(255,255,255,.04); }
+
+
+
+
+
+
+
+
+/* ---------- Custom cursor (desktop hover-only) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  body.cursor-hovering, body.cursor-hovering a, body.cursor-hovering button, body.cursor-hovering input { cursor: none; }
+  .cursor-dot, .cursor-ring {
+    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 4000;
+    border-radius: 50%; will-change: transform; opacity: 0;
+  }
+  .cursor-dot { width: 4px; height: 4px; background: rgba(46,107,255,.7); transform: translate(-50%,-50%); }
+  .cursor-ring {
+    width: 26px; height: 26px; border: 1px solid rgba(46,107,255,.3);
+    transform: translate(-50%,-50%);
+    transition: width .25s ease, height .25s ease, border-color .25s ease, opacity .3s ease;
+  }
+  body.cursor-hovering .cursor-dot, body.cursor-hovering .cursor-ring { opacity: .7; }
+  body.cursor-hovering .cursor-ring { width: 40px; height: 40px; border-color: rgba(242,60,139,.4); }
+}
+
+/* ---------- Trust band: momentum upgrades ---------- */
+.grad-num {
+  color: var(--white);
+}
+.tstat_delta {
+  display: inline-flex; align-items: center; gap: 5px;
+  margin-left: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .02em;
+  color: var(--text-muted); text-transform: uppercase;
+}
+.tstat_delta.up { color: var(--text-muted); }
+.trust_feature {
+  margin-top: 34px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  background: var(--white); border: 1px solid var(--border-strong); border-radius: 16px;
+  position: relative; overflow: hidden;
+  padding: 18px 24px; box-shadow: var(--shadow-card);
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.trust_feature::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+}
+.trust_feature .grad-num { color: var(--bg-dark); }
+.trust_feature:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); }
+.tf_logo { font-size: 19px; font-weight: 700; color: var(--bg-dark); font-family: var(--font-display); display: flex; align-items: center; gap: 10px; }
+.tf_icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 11px; font-weight: 700; letter-spacing: -.01em;
+}
+.tf_body { flex: 1; min-width: 220px; text-align: left; }
+.tf_headline { font-size: 17px; font-weight: 700; color: var(--bg-dark); }
+.tf_sub { font-size: 13px; color: #475569; margin-top: 2px; }
+.tf_badge {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: #047857; background: var(--green-soft); border-radius: 99px; padding: 7px 14px;
+}
+@media (max-width: 767px) { .trust_feature { padding: 16px; } }
+
+/* ---------- Walkthrough counter pill ---------- */
+.walk_counter {
+  position: absolute; top: 16px; right: 16px; z-index: 5;
+  font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .03em;
+  color: var(--white); background: rgba(11,18,32,.65); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.18); border-radius: 99px; padding: 6px 12px;
+}
+.walk_counter span { color: var(--white); }
+
+/* ---------- Personas: interactive tabs ---------- */
+.persona_card { cursor: pointer; position: relative; overflow: hidden; }
+.persona_card:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,107,255,.25), var(--shadow-lift); }
+.persona_card.is-active { background: rgba(46,107,255,.08); border-color: var(--accent); box-shadow: 0 0 0 3px rgba(46,107,255,.10), var(--shadow-lift); }
+.persona_card::after {
+  content: 'Explore ?'; position: absolute; right: 20px; bottom: 18px;
+  font-size: 12px; font-weight: 700; color: var(--accent); opacity: 0; transform: translateX(-6px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.persona_card:hover::after, .persona_card.is-active::after { opacity: 1; transform: none; }
+
+/* ---------- Proof spotlight cycle ---------- */
+.proof_card.is-spotlit { border-color: rgba(46,107,255,.45); box-shadow: 0 0 0 3px rgba(46,107,255,.08), var(--shadow-lift); }
+.proof_card .proof_quote { transition: color .3s ease; }
+
+/* ---------- CTA mini account cards ---------- */
+.cta_cards { position: relative; display: flex; justify-content: center; gap: 14px; margin-bottom: 30px; min-height: 64px; }
+.cta_mini {
+  display: flex; align-items: center; gap: 9px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+  border-radius: 12px; padding: 10px 14px; backdrop-filter: blur(6px);
+  animation: cta-mini-float 4.5s ease-in-out infinite;
+}
+.cta_mini_b { animation-delay: .7s; }
+.cta_mini_c { animation-delay: 1.4s; }
+@keyframes cta-mini-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.cta_mini_dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(5,150,105,.25); }
+.cta_mini_bar { width: 74px; height: 7px; border-radius: 99px; background: rgba(255,255,255,.12); position: relative; overflow: hidden; }
+.cta_mini_bar::after { content:''; position:absolute; inset:0; width: var(--w,60%); border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+.cta_mini_pill { font-size: 10px; font-weight: 700; color: #a5b4fc; background: rgba(46,107,255,.22); padding: 3px 8px; border-radius: 99px; }
+.cta_mini_pill.is-muted { color: #94a3b8; background: rgba(148,163,184,.16); }
+/* CTA card gradient border glow */
+.cta_card { position: relative; }
+.cta_card::before { z-index: 0; }
+.cta_card > * { position: relative; z-index: 1; }
+@media (max-width: 767px) { .cta_cards { flex-wrap: wrap; } }
+
+/* ---------- Footer premium ---------- */
+.social_icon { transition: transform .25s ease, opacity .2s ease; }
+.social_icon:hover { transform: translateY(-3px) scale(1.1); }
+
+/* ============================================================
+   P4: Micro-interactions + reduced-motion parity
+   ============================================================ */
+
+/* tabular numerals for all animated numbers */
+.tstat_num, .stat_num, .walk_counter, .cval, .rcount_num { font-variant-numeric: tabular-nums; }
+
+/* nav link underline sweep */
+.nav_link { position: relative; }
+.nav_link::after {
+  content: ''; position: absolute; left: 0; bottom: -4px; height: 2px; width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+}
+.nav_link:hover::after { transform: scaleX(1); }
+
+/* button press state */
+.btn_primary:active, .btn_ghost:active { transform: scale(.97); }
+
+/* footer link arrow */
+.footer_link { position: relative; }
+
+/* section eyebrow reveal with line */
+.section_eyebrow, .hero_eyebrow { position: relative; }
+
+/* smooth scroll-linked elements use GPU */
+.tm_track, .spark_bar, .cta_mini, .walk_progress, .how_progress_fill, .progress_bar { will-change: transform; }
+
+/* ---------- Reduced motion: neutralize ALL new effects ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cta_mini, .how_hint::after { animation: none !important; }
+  .nav_link::after { transition: none; transform: scaleX(1); }
+  .cursor-dot, .cursor-ring { display: none; }
+  body.cursor-active, body.cursor-active a, body.cursor-active button, body.cursor-active input { cursor: auto; }
+  .persona_card::after { display: none; }
+}
+
+/* ============================================================
+   Demo box creative animation layer
+   ============================================================ */
+
+/* animated dot grid background inside demo bodies */
+.fdemo_body::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(148,163,184,.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: .5;
+  animation: demo-dots-drift 9s linear infinite;
+  z-index: 0;
+}
+@keyframes demo-dots-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 44px 44px; }
+}
+.fdemo_body > * { position: relative; z-index: 1; }
+
+/* shimmer sweep on bars */
+.xbar, .cbar, .cta_mini_bar { position: relative; overflow: hidden; }
+.xbar::before, .cbar::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
+  background-size: 200% 100%; background-position: 120% 0;
+  animation: bar-shimmer 2.8s ease-in-out infinite;
+}
+@keyframes bar-shimmer { 0% { background-position: 120% 0; } 60%,100% { background-position: -80% 0; } }
+
+/* pulsing halo on ARYA dot */
+.xarya_dot, .csig_dot {
+  animation: demo-halo 2.4s ease-in-out infinite;
+}
+@keyframes demo-halo {
+  0%,100% { box-shadow: 0 0 0 0 rgba(5,150,105,.35); }
+  50% { box-shadow: 0 0 0 6px rgba(5,150,105,0); }
+}
+
+/* research: floating tag shimmer */
+.rtag.is-in { animation: tag-glow 3.2s ease-in-out infinite; }
+.rtag.is-in:nth-child(2n) { animation-delay: .8s; }
+.rtag.is-in:nth-child(3n) { animation-delay: 1.6s; }
+@keyframes tag-glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(46,107,255,0); }
+  50% { box-shadow: 0 0 12px 0 rgba(46,107,255,.35); }
+}
+
+/* outreach: dots pulse when lit */
+.odot.is-lit { animation: dot-pop 1.8s ease-in-out infinite; }
+@keyframes dot-pop {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* execute: rows get a soft slide-in shimmer on loop */
+.xrow { animation: row-breathe 3.4s ease-in-out infinite; }
+.xrow:nth-child(2) { animation-delay: .5s; }
+.xrow:nth-child(3) { animation-delay: 1s; }
+@keyframes row-breathe {
+  0%,100% { opacity: .75; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(3px); }
+}
+
+/* count number gradient shimmer */
+.rcount_num {
+  background: linear-gradient(90deg, #fff, #a5b4fc, #fff);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: num-shimmer 3.6s ease-in-out infinite;
+}
+@keyframes num-shimmer { 0% { background-position: 120% 0; } 60%,100% { background-position: -80% 0; } }
+
+/* ---------- Execute sparkline ---------- */
+.xspark { display: flex; align-items: flex-end; gap: 4px; height: 34px; margin: 8px 0 10px; }
+.xspark span {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: linear-gradient(to top, rgba(46,107,255,.35), rgba(46,107,255,.9));
+  height: var(--h, 50%);
+  animation: xspark-bounce 2.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.xspark span:nth-child(2n) { animation-delay: .3s; }
+.xspark span:nth-child(3n) { animation-delay: .6s; }
+@keyframes xspark-bounce {
+  0%,100% { transform: scaleY(.75); opacity: .7; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
