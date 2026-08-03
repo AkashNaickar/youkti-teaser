@@ -863,3 +863,55 @@ html.js-anim .integration_grid .int_chip { opacity: 0; }
 @media (prefers-reduced-motion: reduce) {
   .fdemo:hover .fdemo_shot img { animation: none; }
 }
+
+/* ============================================================
+   ARYA section — ambient + chat demo animation layer
+   ============================================================ */
+
+/* thinking dots */
+.chat_thinking { display: flex; }
+.thinking { display: inline-flex; gap: 5px; align-items: center; min-height: 26px; }
+.chat_thinking .chat_bubble_arya {
+  background: var(--white); color: var(--text); border: 1px solid var(--border);
+  box-shadow: var(--shadow-card); border-radius: 16px 4px 16px 16px;
+}
+.think_dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: think-bounce 1s ease-in-out infinite; }
+.think_dot:nth-child(2) { background: var(--accent-2); animation-delay: .16s; }
+.think_dot:nth-child(3) { background: #7aa7ff; animation-delay: .32s; }
+@keyframes think-bounce {
+  0%,60%,100% { transform: translateY(0); opacity: .45; }
+  30%         { transform: translateY(-5px); opacity: 1; }
+}
+
+/* replay button */
+.arya_replay {
+  align-self: flex-start; margin-left: 40px; margin-top: 2px;
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--white); border: 1px solid var(--border-strong); color: var(--bg-dark);
+  border-radius: 999px; padding: 7px 14px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  transition: color .2s ease, border-color .2s ease, background .2s ease, transform .15s ease;
+}
+.arya_replay:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
+.arya_replay:active { transform: translateY(0); }
+.replay_icon { width: 14px; height: 14px; }
+.arya_replay.is-spinning .replay_icon { animation: replay-spin .5s ease; }
+@keyframes replay-spin { from { transform: rotate(-180deg); } to { transform: rotate(0); } }
+
+/* chat actions: pulse glow on entrance */
+.arya_chip { transition: transform .2s ease, box-shadow .2s ease, background .2s ease; cursor: pointer; }
+.arya_chip:hover { transform: translateY(-1px); }
+.arya_chip.is-on:hover { box-shadow: 0 6px 16px -6px rgba(46,107,255,.5); }
+
+/* chips shine sweep */
+.chat_actions .arya_chip.is-on { position: relative; overflow: hidden; }
+.chat_actions .arya_chip.is-on::after {
+  content:''; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 35%, rgba(255,255,255,.45) 50%, transparent 65%);
+  background-size: 200% 100%; background-position: 120% 0; opacity: 0;
+}
+.chat_actions .arya_chip.is-on.is-glowing::after { opacity: 1; animation: chip-sweep 2.6s ease-in-out infinite; }
+@keyframes chip-sweep { 0% { background-position: 120% 0; } 55%,100% { background-position: -80% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .think_dot { animation: none !important; opacity: .6; }
+  .chat_actions .arya_chip.is-on::after { animation: none; opacity: 0; }
+}
